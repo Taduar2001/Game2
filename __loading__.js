@@ -61,7 +61,6 @@ pc.script.createLoadingScreen(function (app) {
             '@media (max-width: 480px) {',
             '    #application-splash {',
             '        width: 170px;',
-            '        left: calc(50% - 85px);',
             '    }',
             '}'
         ].join('\n');
