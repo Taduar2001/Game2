@@ -18,14 +18,6 @@ pc.script.createLoadingScreen(function (app) {
         logo.onload = function () {
             splash.style.display = 'block';
         };
-
-        var container = document.createElement('div');
-        container.id = 'progress-bar-container';
-        splash.appendChild(container);
-
-        var bar = document.createElement('div');
-        bar.id = 'progress-bar';
-        container.appendChild(bar);
     };
 
     var hideSplash = function () {
@@ -33,18 +25,10 @@ pc.script.createLoadingScreen(function (app) {
         splash.parentElement.removeChild(splash);
     };
 
-    var setProgress = function (value) {
-        var bar = document.getElementById('progress-bar');
-        if (bar) {
-            value = Math.min(1, Math.max(0, value));
-            bar.style.width = value * 100 + '%';
-        }
-    };
-
     var createCss = function () {
         var css = [
             'body {',
-            '    background-color: #283538;',
+            '    background-color: #ffffff;',
             '}',
             '',
             '#application-splash-wrapper {',
@@ -53,7 +37,7 @@ pc.script.createLoadingScreen(function (app) {
             '    left: 0;',
             '    height: 100%;',
             '    width: 100%;',
-            '    background-color: #283538;',
+            '    background-color: #ffffff;',
             '}',
             '',
             '#application-splash {',
@@ -67,19 +51,6 @@ pc.script.createLoadingScreen(function (app) {
             '#application-splash img {',
             '    width: 100%;',
             '    animation: logo-grow 2s infinite alternate;',
-            '}',
-            '',
-            '#progress-bar-container {',
-            '    margin: 20px auto 0 auto;',
-            '    height: 2px;',
-            '    width: 100%;',
-            '    background-color: #1d292c;',
-            '}',
-            '',
-            '#progress-bar {',
-            '    width: 0%;',
-            '    height: 100%;',
-            '    background-color: #f60;',
             '}',
             '',
             '@keyframes logo-grow {',
@@ -112,6 +83,5 @@ pc.script.createLoadingScreen(function (app) {
     app.on('preload:end', function () {
         app.off('preload:progress');
     });
-    app.on('preload:progress', setProgress);
     app.on('start', hideSplash);
 });
