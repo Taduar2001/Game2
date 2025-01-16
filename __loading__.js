@@ -13,6 +13,7 @@ pc.script.createLoadingScreen(function (app) {
 
         var logo = document.createElement('img');
         logo.src = 'https://playcanvas.com/static-assets/images/play_text_252_white.png';
+        logo.id = 'loading-logo';
         splash.appendChild(logo);
         logo.onload = function () {
             splash.style.display = 'block';
@@ -25,7 +26,6 @@ pc.script.createLoadingScreen(function (app) {
         var bar = document.createElement('div');
         bar.id = 'progress-bar';
         container.appendChild(bar);
-
     };
 
     var hideSplash = function () {
@@ -35,7 +35,7 @@ pc.script.createLoadingScreen(function (app) {
 
     var setProgress = function (value) {
         var bar = document.getElementById('progress-bar');
-        if(bar) {
+        if (bar) {
             value = Math.min(1, Math.max(0, value));
             bar.style.width = value * 100 + '%';
         }
@@ -61,10 +61,12 @@ pc.script.createLoadingScreen(function (app) {
             '    top: calc(50% - 28px);',
             '    width: 264px;',
             '    left: calc(50% - 132px);',
+            '    text-align: center;',
             '}',
             '',
             '#application-splash img {',
             '    width: 100%;',
+            '    animation: logo-grow 2s infinite alternate;',
             '}',
             '',
             '#progress-bar-container {',
@@ -78,6 +80,11 @@ pc.script.createLoadingScreen(function (app) {
             '    width: 0%;',
             '    height: 100%;',
             '    background-color: #f60;',
+            '}',
+            '',
+            '@keyframes logo-grow {',
+            '    0% { transform: scale(1); }',
+            '    100% { transform: scale(1.1); }',
             '}',
             '',
             '@media (max-width: 480px) {',
@@ -99,12 +106,12 @@ pc.script.createLoadingScreen(function (app) {
         document.head.appendChild(style);
     };
 
-    //createCss();
-    //showSplash();
+    createCss();
+    showSplash();
 
     app.on('preload:end', function () {
         app.off('preload:progress');
     });
-    //app.on('preload:progress', setProgress);
-    //app.on('start', hideSplash);
+    app.on('preload:progress', setProgress);
+    app.on('start', hideSplash);
 });
