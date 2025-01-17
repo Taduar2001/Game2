@@ -7,6 +7,7 @@ pc.script.createLoadingScreen(function (app) {
 
         // splash
         var splash = document.createElement('div');
+        splash.style.backgroundColor = "#ffffff";
         splash.id = 'application-splash';
         wrapper.appendChild(splash);
         splash.style.display = 'none';
