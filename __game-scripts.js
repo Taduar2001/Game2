@@ -1,1 +1,0 @@
-var Test=pc.createScript("test");Test.prototype.initialize=function(){window.parent.postMessage({action:"gameOver",score:200},"*")},Test.prototype.update=function(t){};
